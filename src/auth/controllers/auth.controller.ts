@@ -10,6 +10,7 @@ import { LoginRstaurantOwnerDto } from '../dto/login-restaurant-owner.dto';
 @ApiTags('Authentification')
 @Controller('auth')
 export class AuthController {
+
     constructor(private readonly authService: AuthService) { }
 
     @Post('otp/customer')
