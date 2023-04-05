@@ -32,7 +32,10 @@ export class RestaurantsService {
       }
     );
   }
-  
+  findAllResto() {
+    return this.restaurantRepository.find( );
+  }
+
   findFilteredRestaurants = (findRestaurants: FindRestaurantsDto) =>
     this.restaurantRepository.findRestaurants(findRestaurants);
 

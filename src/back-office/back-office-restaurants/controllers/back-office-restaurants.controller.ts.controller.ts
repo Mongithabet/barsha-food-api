@@ -7,13 +7,17 @@ import { RestaurantsService } from 'src/restaurants/restaurants.service';
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @ApiTags('Back-office-restaurants')
-@Controller('back-office-restaurants')
+@Controller('bo-restaurants')
 export class BackOfficeRestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) { }
+
+
   @Get()
-  findAll(@Query() filterApproveRestaurantDto: FilterApproveRestaurantDto) {
-    return this.restaurantsService.findAll(filterApproveRestaurantDto);
-  }
+  findAll( ) {
+    return this.restaurantsService.findAllResto();
+  } 
+
+
 
   @Patch(':id/approve')
   approve(@Param('id') id: string) {

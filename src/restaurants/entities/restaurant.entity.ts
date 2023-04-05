@@ -43,11 +43,10 @@ export class Restaurant {
 
   @Column('enum', {
     enum: RestaurantVerificationStatusEnum,
-    default: RestaurantVerificationStatusEnum.APPROVED
+    default: RestaurantVerificationStatusEnum.INREVIEW
   })
-  
-  verificationStatus: RestaurantVerificationStatusEnum;
 
+  verificationStatus: RestaurantVerificationStatusEnum;
 
   @Column({ type: 'double precision', nullable: true })
   longitude: number;

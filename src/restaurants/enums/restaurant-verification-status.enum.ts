@@ -3,3 +3,4 @@ export enum RestaurantVerificationStatusEnum {
     APPROVED = 'APPROVED',
     REJECTED = 'REJECTED'
 }
+
