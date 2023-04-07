@@ -6,7 +6,8 @@ import { DeliveryCompanyRepository } from '../repositories/delivery-company.repo
 export class DeliveryCompaniesService {
     constructor(private readonly deliveryCompanyRepository: DeliveryCompanyRepository) { }
 
-    findAll = async () => this.deliveryCompanyRepository.find();
+    findAll = async () => this.deliveryCompanyRepository.find(
+        {relations:['']});
 
     findOne = async (id: string) => this.deliveryCompanyRepository.findOne({ where: { id } });
 

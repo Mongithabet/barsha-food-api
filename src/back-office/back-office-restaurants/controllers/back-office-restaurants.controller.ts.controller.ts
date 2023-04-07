@@ -17,6 +17,10 @@ export class BackOfficeRestaurantsController {
     return this.restaurantsService.findAllResto();
   } 
 
+  @Get(':id')
+  findById(@Param('id') id:string ) {
+    return this.restaurantsService.findOne(id);
+  } 
 
 
   @Patch(':id/approve')

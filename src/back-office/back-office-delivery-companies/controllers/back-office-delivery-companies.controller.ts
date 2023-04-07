@@ -19,7 +19,9 @@ export class BackOfficeDeliveryCompaniesController {
     @Get()
     findAll() {
 
-      return this.companiesService.findAll();
+      return this.companiesService.findAll(
+        
+      );
 
 
     }
