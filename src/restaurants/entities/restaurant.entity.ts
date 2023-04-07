@@ -64,6 +64,7 @@ export class Restaurant {
   menus: Menu[];
 
   @OneToOne(() => File)
+  @ApiResponseProperty({ type: File })
   @JoinColumn()
   logo: File | string;
 

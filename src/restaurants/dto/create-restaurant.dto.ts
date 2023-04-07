@@ -14,6 +14,16 @@ export class CreateRestaurantDto {
 
     @ApiProperty()
     @IsNotEmpty()
+    @IsString()
+    commercialRegister: string;
+  
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsUUID()
+    image: File | string;
+
+    @ApiProperty()
+    @IsNotEmpty()
     @IsUUID()
     logo: string;
 

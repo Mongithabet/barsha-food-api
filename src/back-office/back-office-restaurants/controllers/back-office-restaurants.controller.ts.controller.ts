@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Patch, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 import { FilterApproveRestaurantDto } from '../../../restaurants/dto/filter-approve-restaurant.dto';
 import { RestaurantsService } from 'src/restaurants/restaurants.service';
+import { CreateRestaurantDto } from 'src/restaurants/dto/create-restaurant.dto';
 
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
@@ -10,6 +11,10 @@ import { RestaurantsService } from 'src/restaurants/restaurants.service';
 @Controller('bo-restaurants')
 export class BackOfficeRestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) { }
+  @Post()
+  create(@Body() createRestaurantDto: CreateRestaurantDto) {
+    return this.restaurantsService.create(createRestaurantDto);
+  }
 
 
   @Get()

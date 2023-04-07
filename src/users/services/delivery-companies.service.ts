@@ -14,3 +14,4 @@ export class DeliveryCompaniesService {
     update = async (deliveryCompany: Partial<DeliveryCompany>) => this.deliveryCompanyRepository.save(deliveryCompany);
 
 }
+
