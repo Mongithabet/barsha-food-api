@@ -16,7 +16,6 @@ export class BackOfficeRestaurantsController {
     return this.restaurantsService.create(createRestaurantDto);
   }
 
-
   @Get()
   findAll( ) {
     return this.restaurantsService.findAllResto();

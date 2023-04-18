@@ -82,7 +82,8 @@ export class DeliveryMan extends User {
   @Column({ type: 'double precision', nullable: true })
   latitude: number;
   
-
+  @Column({ length: 60 })
+  password: string;
 }
 
 
@@ -93,11 +94,12 @@ export class DeliveryCompany extends User {
   })
   otp?: string;
 
-  @OneToMany(() => DeliveryMan, (deliveryMan) => deliveryMan.company)
+
+  @OneToMany(() => DeliveryMan, (deliveryMan) => deliveryMan.company,{eager:true})
   deliveryMans: DeliveryMan[];
 
   @Column({
-    nullable: true,
+    nullable: true,        
   })
   commercialRegister: string;
   
@@ -108,7 +110,12 @@ export class DeliveryCompany extends User {
   @ApiResponseProperty({ type: File })
   @JoinColumn()
   image: File | string;
+
+
+  @Column({ length: 60 })
+  password: string;
 }
+
 
 
 @ChildEntity('RestaurantOwner')
@@ -120,7 +127,8 @@ export class RestaurantOwner extends User {
   password: string;
 }
 
-@ChildEntity('Employee')
+
+@ChildEntity('Employee')  
 export class Employee extends User {
   @Column('enum', {
     enum: EmployeeRoleEnum,

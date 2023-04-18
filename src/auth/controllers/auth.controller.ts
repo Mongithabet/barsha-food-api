@@ -6,6 +6,8 @@ import { OtpVerificationDto } from '../dto/otp-verification.dto';
 import { RegisterRestaurantOwnerDto } from '../dto/register-restaurant-owner.dto';
 import { AuthService } from '../services/auth.service';
 import { LoginRstaurantOwnerDto } from '../dto/login-restaurant-owner.dto';
+import { RegisterDeliveryManDto } from '../dto/register-delivery-man.dto';
+import { RegisterDeliveryCompanyDto } from '../dto/register-delivery-company.dto';
 
 @ApiTags('Authentification')
 @Controller('auth')
@@ -38,9 +40,18 @@ export class AuthController {
         return this.authService.registerRestaurantOwner(registerRestaurantOwnerDto);
     }
 
+    @Post('register/delivery-man')
+    registerDeliveryMan(@Body() registerDeliveryManDto: RegisterDeliveryManDto) {
+        return this.authService.registerDeliveryMan(registerDeliveryManDto);
+    }
+    @Post('register/delivery-company')
+    registerDeliveryCompany(@Body() registerDeliveryCompanyDto: RegisterDeliveryCompanyDto) {
+        return this.authService.registerDeliveryCompany(registerDeliveryCompanyDto);
+    }
     @Post('login/restaurant-owner')
     loginRestaurantOwner(@Body() loginRstaurantOwnerDto: LoginRstaurantOwnerDto) {
         return this.authService.loginRestaurantOwner(loginRstaurantOwnerDto);
     }
+    
 }
 

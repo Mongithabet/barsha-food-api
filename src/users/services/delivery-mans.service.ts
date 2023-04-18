@@ -16,4 +16,9 @@ export class DeliveryMansService {
     findOneByEmail = async (email: string) => this.deliveryManRepository.findOne({ where: { email } });
 
     findOneByPhone = async (phone: string) => this.deliveryManRepository.findOne({ where: { phone } });
+      
+
+      
+    findOneByCompany = async (company: string) => this.deliveryManRepository.findOne({ where: { company } });
+
 }

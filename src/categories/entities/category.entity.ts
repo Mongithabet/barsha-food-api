@@ -19,7 +19,7 @@ export class Category {
 
 
 
-  @ManyToMany(() => Speciality, (speciality) => speciality.categories)
+  @ManyToMany(() => Speciality, (speciality) => speciality.categories,{onDelete: 'CASCADE',onUpdate:'CASCADE',eager:true})
   specialities: Speciality[] | string[];
 
   

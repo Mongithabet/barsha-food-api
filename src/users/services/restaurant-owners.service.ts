@@ -14,6 +14,7 @@ export class RestaurantOwnersService {
     findOneByPhone = async (phone: string) => this.restaurantOwnerRepository.findOne({ where: { phone } });
 
     findAll = async () => this.restaurantOwnerRepository.find();
+    
     findOne = async (id: string) => this.restaurantOwnerRepository.findOne({ where: { id } });
   
   

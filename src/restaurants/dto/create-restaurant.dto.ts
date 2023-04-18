@@ -13,6 +13,11 @@ export class CreateRestaurantDto {
     description: string;
 
     @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
+    street: string;
+
+    @ApiProperty()
     @IsNotEmpty()
     @IsString()
     commercialRegister: string;
@@ -21,16 +26,13 @@ export class CreateRestaurantDto {
     @IsNotEmpty()
     @IsUUID()
     image: File | string;
+  
 
     @ApiProperty()
     @IsNotEmpty()
     @IsUUID()
     logo: string;
 
-    @ApiProperty()
-    @IsString()
-    @IsNotEmpty()
-    street: string;
 
     @ApiProperty()
     @IsString()
@@ -39,14 +41,14 @@ export class CreateRestaurantDto {
 
     @ApiProperty()
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()   
     latitude: number;
 
     @ApiProperty()
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional() 
     longitude: number;
-
+ 
     @ApiProperty({isArray: true, type: () => [String], required: true})
     @IsArray()
     @ArrayMinSize(1)
@@ -54,3 +56,5 @@ export class CreateRestaurantDto {
     @IsUUID('all', { each: true })
     specialities: string[];
 }
+
+

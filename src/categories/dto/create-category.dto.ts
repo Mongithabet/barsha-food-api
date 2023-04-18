@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { ArrayMinSize, IsArray, IsNotEmpty, IsString, IsUUID, ValidateNested } from "class-validator";
+import { CreateSpecialityDto } from "src/specialities/dto/create-speciality.dto";
 
 export class CreateCategoryDto {
 
@@ -15,5 +17,14 @@ export class CreateCategoryDto {
     arName: string;
 
 
+    
+    @ApiProperty({isArray: true, type: () => [String], required: true})
+    @IsArray()
+    @ArrayMinSize(1)
+    @IsNotEmpty()
+    @IsUUID('all', { each: true })
+    specialities: string[];
+
+    
 
 }

@@ -1,9 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import { IsNotEmpty, IsString, IsEmail, IsPhoneNumber, MaxLength, ValidateNested } from "class-validator";
-import { CreateRestaurantDto } from '../../restaurants/dto/create-restaurant.dto';
 
-export class RegisterRestaurantOwnerDto {
+import { IsNotEmpty, IsString, IsEmail, MaxLength, IsOptional, IsUUID } from "class-validator";
+
+export class RegisterDeliveryManDto {
+
     @ApiProperty({ required: true, })
     @IsNotEmpty()
     @IsString()
@@ -24,20 +24,18 @@ export class RegisterRestaurantOwnerDto {
     @ApiProperty({ required: true, })
     @IsNotEmpty()
     @IsString()
-   // @IsPhoneNumber()
+    //@IsPhoneNumber()
     readonly phone: string;
 
     @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsString()
-   // @MaxLength(60)
+    @MaxLength(60)
     readonly password: string;
 
-    
     @ApiProperty({ required: true })
-    @Type(() => CreateRestaurantDto)
-    @ValidateNested({ each: true })
     @IsNotEmpty()
-    readonly restaurant: CreateRestaurantDto;
+    @IsUUID()
+    readonly company: string;  
+    
 }
-

@@ -45,7 +45,7 @@ export class RestaurantsService {
   findOne(id: string) {
     return this.restaurantRepository.findOne({
       where: { id },
-      relations: ['logo', 'specialities', 'menus', 'menus.items', 'menus.items.image']
+      relations: ['logo','image', 'specialities', 'menus', 'menus.items', 'menus.items.image']
     });
   }
 

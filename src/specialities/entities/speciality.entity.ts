@@ -31,5 +31,6 @@ export class Speciality {
   @ManyToMany(() => Category, (category) => category.specialities)
   @JoinTable()
   categories: Category[];
+  
 
 }

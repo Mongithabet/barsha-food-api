@@ -1,13 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CustomersService } from '../../../users/services/customers.service';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UpdateUserDto } from 'src/users/dto/update-user.dto';
+
 
 import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/shared/decorators/user.decorator';
 import { User } from 'src/users/entities/user.entity';
-import { UpdateLocationDto } from 'src/users/dto/update-location.dto';
 import { UpdateActiveDto } from 'src/users/dto/update-active.dto';
 
 
@@ -24,7 +22,6 @@ export class BackOfficeCustomersController {
     findAll() {
 
       return this.customersService.findAll();
-
 
     }
 

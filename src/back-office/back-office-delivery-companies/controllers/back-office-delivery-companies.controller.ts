@@ -4,10 +4,11 @@ import { DeliveryCompaniesService } from '../../../users/services/delivery-compa
 
 
 import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { CreateDeliveryCompaniesDto } from 'src/users/dto/create-delivery-companies.dto';
 
 
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @ApiTags('Back-office-delivery-companies')
 @Controller('bo-delivery-companies')
 export class BackOfficeDeliveryCompaniesController {
@@ -26,13 +27,17 @@ export class BackOfficeDeliveryCompaniesController {
 
     }
 
-    
+
+  
     @Get(':id')
     findOne(@Param('id') id: string) {
       return this.companiesService.findOne(id);
     }
  
+  
 
+ 
+ 
 }
 
 

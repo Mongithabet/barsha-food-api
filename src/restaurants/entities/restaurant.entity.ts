@@ -24,7 +24,8 @@ export class Restaurant {
   })
   commercialRegister: string;
   
-  @Column()
+  @Column({
+    nullable:true})
   expirationDate: Date;
 
   @OneToOne(() => File)
@@ -73,7 +74,7 @@ export class Restaurant {
 
   @OneToMany(() => RestaurantPlatformDiscount,
         (restaurantPlatformDiscount) => restaurantPlatformDiscount.restaurant)
-    platformDiscounts: RestaurantPlatformDiscount[];
+  platformDiscounts: RestaurantPlatformDiscount[];
 
   @Column({ default: false })
   isActive: boolean;

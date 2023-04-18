@@ -30,7 +30,7 @@ export class BackOfficeCategoriesController {
     create(@Body()createCategoryDto: CreateCategoryDto) {
       return this.categoriesService.create(createCategoryDto);
     }  
-  @Patch(':id')
+    @Patch(':id')
     update(@Param()id:string,@Body() updateCategoryDto:UpdateCategoryDto){
       return this.categoriesService.update(id,updateCategoryDto)
     }

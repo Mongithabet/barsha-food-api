@@ -12,13 +12,15 @@ import * as crypto from 'crypto';
 import { OtpVerificationDto } from '../dto/otp-verification.dto';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { RestaurantOwner } from '../../users/entities/user.entity';
+import {  DeliveryCompany, DeliveryMan, RestaurantOwner } from '../../users/entities/user.entity';
 import { RegisterRestaurantOwnerDto } from '../dto/register-restaurant-owner.dto';
 import { Restaurant } from '../../restaurants/entities/restaurant.entity';
 import { Menu } from 'src/menus/entities/menu.entity';
 import { RestaurantOwnersService } from '../../users/services/restaurant-owners.service';
 import { UsersService } from '../../users/services/users.service';
 import { Speciality } from '../../specialities/entities/speciality.entity';
+import { RegisterDeliveryManDto } from '../dto/register-delivery-man.dto';
+import { RegisterDeliveryCompanyDto } from '../dto/register-delivery-company.dto';
 
 @Injectable()
 export class AuthService {
@@ -90,6 +92,95 @@ export class AuthService {
             await queryRunner.release()
         }
     }
+
+
+    registerDeliveryMan = async (registerDeliveryManDto: RegisterDeliveryManDto) => {
+        // create a new query runner
+        const queryRunner = this.dataSource.createQueryRunner()
+
+        // establish real database connection using our new query runner
+        await queryRunner.connect()
+
+
+        // lets now open a new transaction:
+        await queryRunner.startTransaction()
+        try {
+            
+            const fetchedUser =
+                await this.usersService.findOneByEmailOrPhone(registerDeliveryManDto.email, registerDeliveryManDto.phone)
+            if (fetchedUser) throw new ConflictException('USER WITH EMAIL OR PHONE ALREADY EXISTS');
+            const deliveryMan = new DeliveryMan;
+            deliveryMan.email = registerDeliveryManDto.email;
+            deliveryMan.phone = registerDeliveryManDto.phone;
+            deliveryMan.password = bcrypt.hashSync(registerDeliveryManDto.password, 8);
+            deliveryMan.firstName = registerDeliveryManDto.firstName;
+            deliveryMan.lastName = registerDeliveryManDto.lastName;
+            deliveryMan.company = registerDeliveryManDto.company;
+
+            const createdDeliveryMan= await queryRunner.manager.save(DeliveryMan, deliveryMan);
+
+
+            const createdCompany= await queryRunner.manager.save(
+                 createdDeliveryMan
+            );
+
+       console.log(createdCompany);
+       
+
+           
+
+            // commit transaction
+            await queryRunner.commitTransaction();
+        } catch (err) {
+            // since we have errors let's rollback changes we made
+            await queryRunner.rollbackTransaction()
+            throw new HttpException(err, err.status)
+        } finally {
+            // you need to release query runner which is manually created:
+            await queryRunner.release()
+        }
+    }
+
+    registerDeliveryCompany = async (registerDeliveryCompanyDto: RegisterDeliveryCompanyDto) => {
+        // create a new query runner
+        const queryRunner = this.dataSource.createQueryRunner()
+
+        // establish real database connection using our new query runner
+        await queryRunner.connect()
+
+
+        // lets now open a new transaction:
+        await queryRunner.startTransaction()
+        try {
+            
+            const fetchedUser =
+                await this.usersService.findOneByEmailOrPhone(registerDeliveryCompanyDto.email, registerDeliveryCompanyDto.phone)
+            if (fetchedUser) throw new ConflictException('COMPANY WITH EMAIL OR PHONE ALREADY EXISTS');
+            const deliveryCopmany = new DeliveryCompany;
+            deliveryCopmany.email = registerDeliveryCompanyDto.email;
+            deliveryCopmany.phone = registerDeliveryCompanyDto.phone;
+            deliveryCopmany.password = bcrypt.hashSync(registerDeliveryCompanyDto.password, 8);
+
+            const createdCompanyMan= await queryRunner.manager.save(DeliveryCompany, deliveryCopmany);
+
+
+
+    
+
+           
+
+            // commit transaction
+            await queryRunner.commitTransaction();
+        } catch (err) {
+            // since we have errors let's rollback changes we made
+            await queryRunner.rollbackTransaction()
+            throw new HttpException(err, err.status)
+        } finally {
+            // you need to release query runner which is manually created:
+            await queryRunner.release()
+        }
+    }
+
 
     registerCustomer = async (registerCustomerDto: RegisterCustomerDto) => {
         const generatedOTP = crypto
@@ -273,3 +364,4 @@ export class AuthService {
 
     }
 }
+ 

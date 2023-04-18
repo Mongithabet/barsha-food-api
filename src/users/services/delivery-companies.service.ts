@@ -4,14 +4,20 @@ import { DeliveryCompanyRepository } from '../repositories/delivery-company.repo
 
 @Injectable()
 export class DeliveryCompaniesService {
-    constructor(private readonly deliveryCompanyRepository: DeliveryCompanyRepository) { }
+    constructor(private readonly deliveryCompaniesRepository: DeliveryCompanyRepository) { }
 
-    findAll = async () => this.deliveryCompanyRepository.find(
-        {relations:['']});
 
-    findOne = async (id: string) => this.deliveryCompanyRepository.findOne({ where: { id } });
+    findAll = async () => this.deliveryCompaniesRepository.find(
+       );
 
-    update = async (deliveryCompany: Partial<DeliveryCompany>) => this.deliveryCompanyRepository.save(deliveryCompany);
+    findOne = async (id: string) => this.deliveryCompaniesRepository.findOne({ where: { id } });
+
+    update = async (deliveryCompany: Partial<DeliveryCompany>) => this.deliveryCompaniesRepository.save(deliveryCompany);
+
+    
+  
+
+
 
 }
 
